@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Look Barber | Best Barber in Delhi | AI-Powered Haircut & Beard Styling</title>
+<meta name="description" content="Delhi's premium barber shop. AI face-shape analysis, personalized haircut & beard recommendations. Book your appointment online. Best fade, haircut & beard styling in Delhi.">
+<meta name="keywords" content="best barber near me, best haircut in Delhi, fade haircut Delhi, beard styling Delhi, barber shop Delhi, AI hairstyle recommendation">
+<meta property="og:title" content="Prime Look Barber | Premium Barber Studio Delhi">
+<meta property="og:description" content="AI-powered face shape analysis for your perfect haircut. Book online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="pageLoader">
+  <div class="loader-logo">PRIME<span style="color:#F4EFE6;font-weight:300">LOOK</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#ai-tool">AI Style</a>
+  <a href="#booking">Book Now</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#location">Find Us</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">PRIME<span>LOOK</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#ai-tool">AI Style</a></li>
+    <li><a href="#booking">Booking</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Find Us</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- OFFER STRIP -->
+<div class="offer-strip" style="margin-top:72px;">
+  <div class="offer-text">🔥 LIMITED OFFER: Haircut + Beard Combo — Save ₹200 &nbsp;|&nbsp; Code: <span class="offer-code">PRIME200</span></div>
+  <div class="offer-timer">
+    <span class="timer-seg" id="tH">02</span>
+    <span class="timer-colon">:</span>
+    <span class="timer-seg" id="tM">47</span>
+    <span class="timer-colon">:</span>
+    <span class="timer-seg" id="tS">33</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Delhi's Premier Barber Studio</div>
+    <h1 class="hero-h1">Your Face.<br>Your Style.<br><em>Your Prime Look.</em></h1>
+    <p class="hero-sub">We don't just cut hair. Our AI engineers precision styles based on your face shape, hair texture, and personality — because your cut should work for you.</p>
+    <div class="hero-btns">
+      <a href="#ai-tool" class="btn btn-gold">✨ Find My Perfect Style</a>
+      <a href="#booking" class="btn btn-outline">📅 Book Appointment</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">1200<sup>+</sup></div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item"><div class="stat-num">98<sup>%</sup></div><div class="stat-label">Satisfaction</div></div>
+    <div class="stat-item"><div class="stat-num">8<sup>+</sup></div><div class="stat-label">Years Expert</div></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">Scroll</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<section id="services">
+  <div class="section-eyebrow"><span>What We Offer</span></div>
+  <h2 class="section-title reveal">Premium <span class="gold">Services</span></h2>
+  <p class="section-subtitle reveal reveal-d1">Every service is tailored to your face structure. No templates. No guesswork.</p>
+  <div class="services-grid" id="servicesGrid" style="margin-top:56px;"></div>
+</section>
+
+<!-- ═══════════════════ GALLERY ═══════════════════ -->
+<section id="gallery" style="background:var(--black);">
+  <div class="section-eyebrow"><span>Our Work</span></div>
+  <h2 class="section-title reveal">Style <span class="gold">Gallery</span></h2>
+  <div class="gallery-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="haircut">Haircuts</button>
+    <button class="filter-btn" data-filter="beard">Beard</button>
+    <button class="filter-btn" data-filter="fade">Fades</button>
+    <button class="filter-btn" data-filter="color">Color</button>
+    <button class="filter-btn" data-filter="transform">Transformations</button>
+  </div>
+  <div class="gallery-masonry" id="galleryGrid"></div>
+</section>
+
+<!-- ═══════════════════ TRENDING ═══════════════════ -->
+<section id="trending" style="background:var(--dark);padding:72px 40px;">
+  <div class="section-eyebrow"><span>This Month's Picks</span></div>
+  <h2 class="section-title reveal">Trending <span class="gold">Styles</span></h2>
+  <div class="trending-rail" id="trendingRail"></div>
+</section>
+
+<!-- ═══════════════════ AI STYLE TOOL ═══════════════════ -->
+<section id="ai-tool">
+  <div class="section-eyebrow"><span>Smart Technology</span></div>
+  <h2 class="section-title reveal">AI <span class="gold">Style</span> Advisor</h2>
+  <p class="section-subtitle reveal reveal-d1">Upload your photo. Our AI analyzes your face shape, hair type, and density — then generates the most flattering hairstyle and beard options just for you.</p>
+
+  <div class="ai-layout" style="margin-top:56px;">
+    <!-- LEFT: Upload Card -->
+    <div class="ai-left" id="uploadCard">
+      <div class="upload-card">
+        <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;">Step 1 — Upload Your Photo</p>
+
+        <!-- Drop zone -->
+        <div class="upload-drop" id="uploadDrop" onclick="document.getElementById('photoFileInput').click()">
+          <input type="file" id="photoFileInput" accept="image/*" style="display:none">
+          <span class="upload-icon">📸</span>
+          <div class="upload-title">Upload Your Photo</div>
+          <p class="upload-note">Front-facing photo works best. Drag & drop or click to browse. Your photo is analyzed securely and auto-deleted after 2 hours.</p>
+          <button class="btn btn-gold btn-sm" type="button">Choose Photo</button>
+        </div>
+
+        <!-- Preview -->
+        <div class="upload-photo-preview" id="uploadPreview">
+          <img id="uploadPreviewImg" src="" alt="Your uploaded photo">
+          <button class="upload-remove" onclick="removePhoto()" title="Remove photo">✕</button>
+        </div>
+
+        <div class="upload-status" id="uploadStatus"></div>
+
+        <button class="btn btn-gold btn-full" id="analyzeBtn" onclick="analyzePhoto()" style="display:none;margin-top:16px;">
+          🔍 Analyze My Face Shape
+        </button>
+
+        <!-- Analysis Loading -->
+        <div class="analysis-overlay" id="aiAnalysisOverlay">
+          <span class="analysis-spin">🤖</span>
+          <div class="analysis-msg">Analyzing your face...</div>
+          <div class="analysis-sub" id="analysisMsg">Detecting face landmarks...</div>
+          <div class="analysis-bar"><div class="analysis-fill" id="analysisFill"></div></div>
+        </div>
+
+        <!-- Privacy note -->
+        <div style="margin-top:16px;padding:12px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.1);">
+          <p style="font-size:10px;color:var(--light-grey);line-height:1.6;">🔒 <strong style="color:var(--pale-grey)">Privacy:</strong> Your photo is processed securely and automatically deleted after 2 hours. We never share or store your photos permanently.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Results -->
+    <div>
+      <!-- Placeholder before analysis -->
+      <div id="aiPlaceholder" style="background:var(--dark2);border:1px solid rgba(201,168,76,0.1);padding:48px;text-align:center;">
+        <div style="font-size:64px;margin-bottom:20px;">🤖</div>
+        <div style="font-family:var(--font-display);font-size:28px;margin-bottom:12px;">AI Awaiting Your Photo</div>
+        <p style="font-family:var(--font-accent);font-size:16px;color:var(--light-grey);line-height:1.7;max-width:400px;margin:0 auto 28px;">Upload your photo on the left and our AI will analyze your face shape, hair type, and generate personalized style recommendations.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:360px;margin:0 auto;">
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">🥚</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Oval</div></div>
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">⬜</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Square</div></div>
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">⭕</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Round</div></div>
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">💎</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Diamond</div></div>
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">🔺</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Triangle</div></div>
+          <div style="background:var(--dark3);padding:14px;text-align:center;border:1px solid rgba(201,168,76,0.1)"><div style="font-size:24px;margin-bottom:6px;">📏</div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--light-grey)">Oblong</div></div>
+        </div>
+      </div>
+
+      <!-- AI Results (hidden until analysis done) -->
+      <div class="ai-results" id="aiResults">
+        <!-- Analysis header -->
+        <div class="results-header">
+          <div class="face-shape-badge" id="faceShapeBadge">OVAL FACE</div>
+          <p style="font-family:var(--font-accent);font-size:16px;color:var(--light-grey);line-height:1.6;font-weight:300;">Your AI analysis is complete. Select a style below to see a personalized preview.</p>
+          <div class="analysis-scores">
+            <div class="score-box"><div class="score-label">Jawline Score</div><div class="score-value" id="jawScore">—</div></div>
+            <div class="score-box"><div class="score-label">Hair Density</div><div class="score-value" id="hairDensity">—</div></div>
+            <div class="score-box"><div class="score-label">Hair Texture</div><div class="score-value" id="hairTexture">—</div></div>
+            <div class="score-box"><div class="score-label">Style Profile</div><div class="score-value" id="stylePersonality" style="font-size:14px;">—</div></div>
+          </div>
+        </div>
+
+        <!-- Hairstyle recommendations -->
+        <div class="style-section">
+          <div class="style-section-title">✂️ Recommended Hairstyles — Click to Preview</div>
+          <div class="styles-grid" id="hairStylesGrid"></div>
+        </div>
+
+        <!-- Hair AI Preview Panel -->
+        <div class="preview-panel" id="hairPreviewPanel">
+          <div class="preview-panel-header">
+            <div class="pp-dot"></div>
+            <div class="pp-title">AI Hairstyle Preview — Generated For You</div>
+          </div>
+          <div class="preview-panel-body" id="hairPreviewPanelBody"></div>
+        </div>
+
+        <!-- Beard recommendations -->
+        <div class="style-section" style="margin-top:28px;">
+          <div class="style-section-title">🧔 Recommended Beard Styles — Click to Preview</div>
+          <div class="styles-grid" id="beardStylesGrid"></div>
+        </div>
+
+        <!-- Beard AI Preview Panel -->
+        <div class="preview-panel" id="beardPreviewPanel">
+          <div class="preview-panel-header">
+            <div class="pp-dot"></div>
+            <div class="pp-title">AI Beard Preview — Generated For You</div>
+          </div>
+          <div class="preview-panel-body" id="beardPreviewPanelBody"></div>
+        </div>
+
+        <!-- Styling Tips -->
+        <div style="background:var(--dark2);border:1px solid rgba(201,168,76,0.15);padding:24px;margin-top:20px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Expert Styling Tips For You</div>
+          <div id="stylingTips"></div>
+        </div>
+
+        <!-- CTA -->
+        <div style="display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;">
+          <a href="#booking" class="btn btn-gold">📅 Book With This Style</a>
+          <button class="btn btn-outline" onclick="removePhoto()">📸 Try Another Photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TRANSFORMATIONS ═══════════════════ -->
+<section id="transformations">
+  <div class="section-eyebrow"><span>Client Transformations</span></div>
+  <h2 class="section-title reveal">Before <span class="gold">&amp;</span> After</h2>
+  <div class="transform-grid" id="transformGrid"></div>
+</section>
+
+<!-- ═══════════════════ REVIEWS ═══════════════════ -->
+<section id="reviews" style="background:var(--dark);">
+  <div class="section-eyebrow"><span>Client Love</span></div>
+  <h2 class="section-title reveal">What They <span class="gold">Say</span></h2>
+  <div class="reviews-grid" id="reviewsGrid"></div>
+  <div style="text-align:center;margin-top:40px;" class="reveal">
+    <a href="https://g.page/r/primelook-delhi/review" target="_blank" class="btn btn-outline">⭐ See All Google Reviews</a>
+  </div>
+</section>
+
+<!-- ═══════════════════ BOOKING ═══════════════════ -->
+<section id="booking" style="background:var(--black);">
+  <div class="section-eyebrow"><span>Reserve Your Spot</span></div>
+  <h2 class="section-title reveal">Book Your <span class="gold">Appointment</span></h2>
+
+  <div class="booking-layout">
+    <!-- BOOKING FORM -->
+    <div class="booking-form-card reveal">
+      <!-- Progress Bar -->
+      <div class="booking-progress">
+        <div class="bp-step active" id="bp1"></div>
+        <div class="bp-step" id="bp2"></div>
+        <div class="bp-step" id="bp3"></div>
+        <div class="bp-step" id="bp4"></div>
+        <div class="bp-step" id="bp5"></div>
+      </div>
+
+      <!-- Step 1: Service -->
+      <div class="booking-step active" id="bstp1">
+        <div class="step-heading">Choose <span>Service</span></div>
+        <div class="service-picker">
+          <div class="sp-item" onclick="selectService(this,'haircut','Precision Haircut','₹399')">
+            <div class="sp-icon">✂️</div><div class="sp-name">Precision Haircut</div><div class="sp-price">₹399</div>
+          </div>
+          <div class="sp-item" onclick="selectService(this,'beard','Beard Sculpting','₹249')">
+            <div class="sp-icon">🧔</div><div class="sp-name">Beard Sculpting</div><div class="sp-price">₹249</div>
+          </div>
+          <div class="sp-item" onclick="selectService(this,'combo','Prime Combo','₹549')">
+            <div class="sp-icon">👑</div><div class="sp-name">Prime Combo</div><div class="sp-price">₹549</div>
+          </div>
+          <div class="sp-item" onclick="selectService(this,'styling','Hair Styling','₹199')">
+            <div class="sp-icon">💈</div><div class="sp-name">Hair Styling</div><div class="sp-price">₹199</div>
+          </div>
+          <div class="sp-item" onclick="selectService(this,'color','Hair Color','₹799')">
+            <div class="sp-icon">🎨</div><div class="sp-name">Hair Color</div><div class="sp-price">₹799</div>
+          </div>
+          <div class="sp-item" onclick="selectService(this,'consult','Face Shape Consult','Free')">
+            <div class="sp-icon">🔬</div><div class="sp-name">Face Consult</div><div class="sp-price">Free</div>
+          </div>
+        </div>
+        <div class="step-nav" style="margin-top:24px;">
+          <button class="btn btn-gold btn-full" onclick="nextBookingStep(2)">Next: Choose Hairstyle →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Hairstyle -->
+      <div class="booking-step" id="bstp2">
+        <div class="step-heading">Choose <span>Hairstyle</span></div>
+        <p style="font-size:12px;color:var(--light-grey);margin-bottom:16px;">Your AI recommendations are pre-selected if you used the Style Advisor above.</p>
+        <div class="style-picker-mini" id="bookHairPicker"></div>
+        <div class="step-nav">
+          <button class="btn btn-outline" onclick="nextBookingStep(1)">← Back</button>
+          <button class="btn btn-gold" onclick="nextBookingStep(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Beard -->
+      <div class="booking-step" id="bstp3">
+        <div class="step-heading">Choose <span>Beard Style</span></div>
+        <div class="style-picker-mini" id="bookBeardPicker"></div>
+        <div class="step-nav">
+          <button class="btn btn-outline" onclick="nextBookingStep(2)">← Back</button>
+          <button class="btn btn-gold" onclick="nextBookingStep(4)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Date & Time -->
+      <div class="booking-step" id="bstp4">
+        <div class="step-heading">Select <span>Date & Time</span></div>
+        <div class="form-group">
+          <label class="form-label">Select Date</label>
+          <input type="date" class="form-input" id="bookDate" onchange="loadTimeSlots()">
+        </div>
+        <div class="form-group" id="timeSlotsGroup" style="display:none;">
+          <label class="form-label">Available Time Slots</label>
+          <div class="time-slots" id="timeSlots"></div>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-outline" onclick="nextBookingStep(3)">← Back</button>
+          <button class="btn btn-gold" onclick="nextBookingStep(5)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Contact -->
+      <div class="booking-step" id="bstp5">
+        <div class="step-heading">Your <span>Details</span></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-input" id="custName" placeholder="Your Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp Number *</label>
+            <input type="tel" class="form-input" id="custPhone" placeholder="+91 9XXXXXXXX0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Notes (Optional)</label>
+          <textarea class="form-input" id="custNotes" rows="3" placeholder="Any specific requests, allergies, or notes for your barber..."></textarea>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-outline" onclick="nextBookingStep(4)">← Back</button>
+          <button class="btn btn-gold" id="submitBookingBtn" onclick="confirmBooking()" style="flex:1;">Confirm Booking ✓</button>
+        </div>
+        <p style="font-size:11px;color:var(--light-grey);margin-top:16px;text-align:center;">After booking, we'll send a WhatsApp confirmation with all details.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="booking-sidebar reveal reveal-d1">
+      <div class="booking-summary">
+        <div class="bs-title">📋 Booking Summary</div>
+        <div class="bs-row"><span class="bs-key">Service</span><span class="bs-val" id="bsService">—</span></div>
+        <div class="bs-row"><span class="bs-key">Hairstyle</span><span class="bs-val" id="bsHair">—</span></div>
+        <div class="bs-row"><span class="bs-key">Beard Style</span><span class="bs-val" id="bsBeard">—</span></div>
+        <div class="bs-row"><span class="bs-key">Date</span><span class="bs-val" id="bsDate">—</span></div>
+        <div class="bs-row"><span class="bs-key">Time</span><span class="bs-val" id="bsTime">—</span></div>
+        <div class="bs-row" style="border-top:1px solid rgba(201,168,76,0.15);margin-top:8px;padding-top:12px;">
+          <span class="bs-key">Total</span>
+          <span class="bs-val gold" id="bsPrice">—</span>
+        </div>
+      </div>
+
+      <div class="shop-info-card">
+        <div class="bs-title" style="margin-bottom:20px;">📍 Visit Us</div>
+        <div class="si-item">
+          <div class="si-icon">📍</div>
+          <div><div class="si-label">Address</div><div class="si-val">Connaught Place, New Delhi – 110001</div></div>
+        </div>
+        <div class="si-item">
+          <div class="si-icon">📞</div>
+          <div><div class="si-label">Phone</div><div class="si-val">+91 98765 43210</div></div>
+        </div>
+        <div class="si-item">
+          <div class="si-icon">⏰</div>
+          <div><div class="si-label">Hours</div><div class="si-val">Mon–Sat: 9 AM – 9 PM<br>Sunday: 10 AM – 6 PM</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button class="btn btn-wa btn-full" onclick="quickWhatsApp()">
+          💬 Quick Book via WhatsApp
+        </button>
+        <p style="font-size:11px;color:var(--light-grey);text-align:center;margin-top:12px;">Or call: <strong style="color:var(--gold)">+91 98765 43210</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LOCATION ═══════════════════ -->
+<section id="location" style="background:var(--dark);">
+  <div class="section-eyebrow"><span>Find Us</span></div>
+  <h2 class="section-title reveal">Visit <span class="gold">Prime Look</span></h2>
+  <div class="location-grid">
+    <div class="location-info reveal">
+      <div class="loc-card">
+        <div class="loc-icon">📍</div>
+        <div class="loc-label">Address</div>
+        <div class="loc-val">Connaught Place, Central Delhi<br>New Delhi – 110001</div>
+      </div>
+      <div class="loc-card">
+        <div class="loc-icon">📞</div>
+        <div class="loc-label">Contact</div>
+        <div class="loc-val">+91 98765 43210<br>info@primelook.in</div>
+      </div>
+      <div class="loc-card">
+        <div class="loc-icon">⏰</div>
+        <div class="loc-label">Working Hours</div>
+        <div class="hours-grid" style="margin-top:8px;">
+          <div class="hour-row today"><span class="hour-day">Thursday</span><span class="hour-time">9AM–9PM ✓</span></div>
+          <div class="hour-row"><span class="hour-day">Friday</span><span class="hour-time">9AM–9PM</span></div>
+          <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time">9AM–9PM</span></div>
+          <div class="hour-row"><span class="hour-day">Sunday</span><span class="hour-time">10AM–6PM</span></div>
+          <div class="hour-row"><span class="hour-day">Monday</span><span class="hour-time">9AM–9PM</span></div>
+          <div class="hour-row"><span class="hour-day">Tuesday</span><span class="hour-time">9AM–9PM</span></div>
+        </div>
+      </div>
+      <a href="https://wa.me/919876543210" target="_blank" class="btn btn-wa btn-full">💬 Chat on WhatsApp</a>
+    </div>
+    <div class="map-wrap reveal reveal-d1">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.893064093707!2d77.21841931508262!3d28.632862982414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393f22!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo">PRIME<span>LOOK</span></a>
+      <p class="footer-desc" style="margin-top:16px;">Delhi's premium barber studio. AI-powered face-shape-based cuts, expert beard sculpting, and a premium experience that transforms more than just your hair.</p>
+      <div class="footer-socials">
+        <div class="social-btn">📘</div>
+        <div class="social-btn">📷</div>
+        <div class="social-btn">▶️</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Precision Haircut</a></li>
+        <li><a href="#services">Beard Sculpting</a></li>
+        <li><a href="#services">Prime Combo</a></li>
+        <li><a href="#services">Hair Styling</a></li>
+        <li><a href="#services">Hair Color</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#ai-tool">AI Style Advisor</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Book Now</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="/admin">Admin Login</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><a href="mailto:info@primelook.in">info@primelook.in</a></li>
+        <li><a href="https://wa.me/919876543210">WhatsApp Us</a></li>
+        <li><a href="#location">Connaught Place, Delhi</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Prime Look Barber Studio, New Delhi. All rights reserved.</div>
+    <div style="font-size:11px;color:var(--mid-grey);">Crafted with ✂️ for Prime Gentlemen</div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210?text=Hello%20Prime%20Look!%20I%20want%20to%20book%20an%20appointment." target="_blank" class="wa-float" title="Chat on WhatsApp">
+  💬
+  <span class="wa-float-tooltip">Book via WhatsApp</span>
+</a>
+
+<!-- BOOKING CONFIRMATION MODAL -->
+<div class="modal-overlay" id="bookingConfirmModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('bookingConfirmModal')">✕</button>
+    <span class="modal-icon">✅</span>
+    <div class="modal-title">Booking Confirmed!</div>
+    <p class="modal-sub">Your appointment is reserved. Open WhatsApp below to send the confirmation to our team.</p>
+    <div class="conf-table">
+      <div class="conf-row"><span class="conf-key">Name</span><span class="conf-val" id="confName">—</span></div>
+      <div class="conf-row"><span class="conf-key">Phone</span><span class="conf-val" id="confPhone">—</span></div>
+      <div class="conf-row"><span class="conf-key">Service</span><span class="conf-val" id="confService">—</span></div>
+      <div class="conf-row"><span class="conf-key">Hairstyle</span><span class="conf-val" id="confHair">—</span></div>
+      <div class="conf-row"><span class="conf-key">Beard Style</span><span class="conf-val" id="confBeard">—</span></div>
+      <div class="conf-row"><span class="conf-key">Date</span><span class="conf-val" id="confDate">—</span></div>
+      <div class="conf-row"><span class="conf-key">Time</span><span class="conf-val" id="confTime">—</span></div>
+      <div class="conf-row"><span class="conf-key">Booking ID</span><span class="conf-val" id="confId">—</span></div>
+    </div>
+    <a id="confWaLink" href="#" target="_blank" class="btn btn-wa btn-full" style="margin-bottom:12px;">💬 Confirm via WhatsApp</a>
+    <button class="btn btn-outline btn-full" onclick="closeModal('bookingConfirmModal')">Close</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
