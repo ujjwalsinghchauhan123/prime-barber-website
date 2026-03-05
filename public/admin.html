@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Look — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<!-- ═══════════════════ LOGIN SCREEN ═══════════════════ -->
+<div class="admin-login" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">PRIME<span>LOOK</span></div>
+    <div class="login-sub">Admin Dashboard</div>
+    <div class="login-form">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="admin" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">Login to Dashboard</button>
+      <div class="login-error" id="loginError">Invalid username or password</div>
+    </div>
+    <div style="margin-top:24px;text-align:center;font-size:11px;color:#555;">
+      Default: admin / primelook2025 &nbsp;|&nbsp; <a href="/" style="color:#C9A84C;">← Back to Site</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+<div class="admin-layout" id="dashboard" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">PRIME<span>LOOK</span></div>
+    <div class="sidebar-role">Barber Admin</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" class="active" onclick="showSection('overview',this)"><span class="nav-icon">📊</span> Overview</a></li>
+      <li><a href="#" onclick="showSection('bookings',this)"><span class="nav-icon">📅</span> Bookings</a></li>
+      <li><a href="#" onclick="showSection('today',this)"><span class="nav-icon">🗓️</span> Today's Queue</a></li>
+      <li><a href="#" onclick="showSection('clients',this)"><span class="nav-icon">👤</span> Clients</a></li>
+      <div class="sidebar-divider"></div>
+      <li><a href="#" onclick="showSection('analytics',this)"><span class="nav-icon">📈</span> Analytics</a></li>
+      <li><a href="/" target="_blank"><span class="nav-icon">🌐</span> View Website</a></li>
+    </ul>
+    <div class="sidebar-logout">
+      <button onclick="doLogout()">⟵ Logout</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+
+    <!-- ── OVERVIEW ── -->
+    <div class="admin-section active" id="sec-overview">
+      <div class="page-header">
+        <div class="page-title">Dashboard Overview</div>
+        <div class="page-sub" id="overviewDate">Loading...</div>
+      </div>
+      <div class="stat-cards" id="statCards">
+        <div class="stat-card"><div class="sc-icon">📅</div><div class="sc-val" id="st-total">—</div><div class="sc-label">Total Bookings</div></div>
+        <div class="stat-card"><div class="sc-icon">🗓️</div><div class="sc-val" id="st-today">—</div><div class="sc-label">Today's Appointments</div></div>
+        <div class="stat-card"><div class="sc-icon">💰</div><div class="sc-val" id="st-revenue">—</div><div class="sc-label">Est. Revenue</div></div>
+        <div class="stat-card"><div class="sc-icon">🤖</div><div class="sc-val" id="st-scans">—</div><div class="sc-label">AI Face Scans</div></div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Services Breakdown</div>
+          <div class="bar-chart" id="serviceChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Quick Stats</div>
+          <div id="quickStats" style="display:flex;flex-direction:column;gap:16px;"></div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Recent Bookings</div>
+          <button class="action-btn ab-view" onclick="showSection('bookings',null)">View All →</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Photo</th><th>Client</th><th>Service</th><th>Hairstyle</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="recentBookingsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ALL BOOKINGS ── -->
+    <div class="admin-section" id="sec-bookings">
+      <div class="page-header">
+        <div class="page-title">All Bookings</div>
+        <div class="page-sub">Manage and track all appointments</div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Booking List</div>
+          <div class="table-actions">
+            <input type="text" class="search-input" placeholder="Search by name, service..." id="bookingSearch" oninput="filterBookings()">
+            <select class="filter-select" id="statusFilter" onchange="filterBookings()">
+              <option value="">All Status</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Photo</th><th>Client</th><th>Phone</th><th>Service</th><th>Hairstyle</th><th>Beard</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="bookingsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TODAY'S QUEUE ── -->
+    <div class="admin-section" id="sec-today">
+      <div class="page-header">
+        <div class="page-title">Today's Queue</div>
+        <div class="page-sub" id="todayDate">—</div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">Today's Appointments</div></div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>#</th><th>Photo</th><th>Client</th><th>Phone</th><th>Time</th><th>Service</th><th>Hairstyle</th><th>Beard</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="todayTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CLIENTS ── -->
+    <div class="admin-section" id="sec-clients">
+      <div class="page-header">
+        <div class="page-title">Client Photos & Styles</div>
+        <div class="page-sub">View uploaded photos and selected styles</div>
+      </div>
+      <div id="clientsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;"></div>
+    </div>
+
+    <!-- ── ANALYTICS ── -->
+    <div class="admin-section" id="sec-analytics">
+      <div class="page-header">
+        <div class="page-title">Analytics</div>
+        <div class="page-sub">Performance metrics and insights</div>
+      </div>
+      <div class="stat-cards">
+        <div class="stat-card"><div class="sc-icon">🌐</div><div class="sc-val" id="an-visits">—</div><div class="sc-label">Total Page Visits</div></div>
+        <div class="stat-card"><div class="sc-icon">📅</div><div class="sc-val" id="an-bookings">—</div><div class="sc-label">Total Bookings</div></div>
+        <div class="stat-card"><div class="sc-icon">🤖</div><div class="sc-val" id="an-scans">—</div><div class="sc-label">AI Scans</div></div>
+        <div class="stat-card"><div class="sc-icon">📊</div><div class="sc-val" id="an-conversion">—</div><div class="sc-label">Conversion Rate</div></div>
+      </div>
+      <div class="charts-grid" style="margin-top:0;">
+        <div class="chart-card">
+          <div class="chart-title">Revenue by Service</div>
+          <div class="bar-chart" id="revenueChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Booking Status</div>
+          <div id="statusChart"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- BOOKING DETAIL MODAL -->
+<div class="admin-modal-overlay" id="bookingDetailModal">
+  <div class="admin-modal">
+    <button class="am-close" onclick="closeAdminModal()">✕</button>
+    <div class="am-title">Booking Details</div>
+    <div class="am-photo" id="amPhoto"></div>
+    <div class="am-grid" id="amGrid"></div>
+    <div class="am-actions" id="amActions"></div>
+  </div>
+</div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────
+let AUTH = '';
+let allBookings = [];
+let analytics = {};
+
+// ── LOGIN ──────────────────────────────────────────────────────────
+async function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+  if (!user || !pass) return;
+
+  try {
+    const resp = await fetch('/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: user, password: pass })
+    });
+    const data = await resp.json();
+    if (data.success) {
+      AUTH = data.token;
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'grid';
+      loadDashboard();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  } catch(e) {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  AUTH = '';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+// ── LOAD DATA ──────────────────────────────────────────────────────
+async function loadDashboard() {
+  document.getElementById('overviewDate').textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  await Promise.all([loadBookings(), loadAnalytics()]);
+}
+
+async function loadBookings() {
+  try {
+    const resp = await fetch(`/admin/bookings?username=${AUTH.split(':')[0]}&password=${AUTH.split(':')[1]}`, { headers: { 'x-admin-auth': AUTH } });
+    const data = await resp.json();
+    if (data.success) { allBookings = data.bookings; renderAllBookings(); }
+  } catch(e) { console.error('Load bookings failed', e); }
+}
+
+async function loadAnalytics() {
+  try {
+    const resp = await fetch(`/admin/analytics`, { headers: { 'x-admin-auth': AUTH } });
+    const data = await resp.json();
+    if (data.success) {
+      analytics = data.analytics;
+      renderOverview(analytics);
+    }
+  } catch(e) { console.error('Analytics failed', e); }
+}
+
+// ── RENDER OVERVIEW ────────────────────────────────────────────────
+function renderOverview(a) {
+  setText('st-total', a.totalBookings || 0);
+  setText('st-today', a.todayBookings || 0);
+  setText('st-revenue', '₹' + formatNum(a.totalRevenue || 0));
+  setText('st-scans', a.aiScans || 0);
+
+  // Service chart
+  const sc = a.serviceCounts || {};
+  const maxCount = Math.max(...Object.values(sc), 1);
+  document.getElementById('serviceChart').innerHTML = Object.entries(sc).map(([name, count]) => `
+    <div class="bar-row">
+      <div class="bar-label" title="${name}">${name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(count/maxCount*100).toFixed(1)}%"></div></div>
+      <div class="bar-count">${count}</div>
+    </div>
+  `).join('') || '<div style="color:var(--light-grey);font-size:12px;padding:10px 0;">No bookings yet</div>';
+
+  // Quick stats
+  document.getElementById('quickStats').innerHTML = `
+    <div style="background:var(--dark3);padding:16px;border:1px solid rgba(201,168,76,0.1);">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--light-grey);margin-bottom:4px;">This Week</div>
+      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--gold)">${a.weekBookings || 0}</div>
+      <div style="font-size:11px;color:var(--light-grey)">appointments booked</div>
+    </div>
+    <div style="background:var(--dark3);padding:16px;border:1px solid rgba(201,168,76,0.1);">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--light-grey);margin-bottom:4px;">Confirmed</div>
+      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#2ecc71">${a.confirmedBookings || 0}</div>
+      <div style="font-size:11px;color:var(--light-grey)">out of ${a.totalBookings || 0} total</div>
+    </div>
+    <div style="background:var(--dark3);padding:16px;border:1px solid rgba(201,168,76,0.1);">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--light-grey);margin-bottom:4px;">AI Scans</div>
+      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--gold)">${a.aiScans || 0}</div>
+      <div style="font-size:11px;color:var(--light-grey)">face analyses done</div>
+    </div>
+  `;
+
+  // Recent bookings
+  renderBookingsTable('recentBookingsTbody', (a.recentBookings || []).slice(0, 5));
+}
+
+// ── RENDER BOOKING TABLES ──────────────────────────────────────────
+function renderAllBookings() {
+  renderBookingsTable('bookingsTbody', allBookings, true);
+  renderTodayQueue();
+  renderClientsGrid();
+
+  // Analytics section
+  setText('an-visits', analytics.visits || 0);
+  setText('an-bookings', allBookings.length);
+  setText('an-scans', analytics.aiScans || 0);
+  const conversion = analytics.visits ? ((allBookings.length / analytics.visits) * 100).toFixed(1) + '%' : '—';
+  setText('an-conversion', conversion);
+
+  const sc = analytics.serviceCounts || {};
+  const prices = { 'Precision Haircut': 399, 'Beard Sculpting': 249, 'Prime Combo': 549, 'Hair Styling': 199, 'Hair Color': 799 };
+  const maxRev = Math.max(...Object.entries(sc).map(([n,c]) => (prices[n]||0)*c), 1);
+  document.getElementById('revenueChart').innerHTML = Object.entries(sc).map(([name, count]) => {
+    const rev = (prices[name] || 0) * count;
+    return `<div class="bar-row"><div class="bar-label">${name}</div><div class="bar-track"><div class="bar-fill" style="width:${(rev/maxRev*100).toFixed(1)}%"></div></div><div class="bar-count" style="font-size:10px;">₹${formatNum(rev)}</div></div>`;
+  }).join('') || '<div style="color:var(--light-grey);font-size:12px;padding:10px 0;">No data</div>';
+
+  const confirmed = allBookings.filter(b => b.status === 'confirmed').length;
+  const cancelled = allBookings.filter(b => b.status === 'cancelled').length;
+  document.getElementById('statusChart').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:14px;padding-top:10px;">
+      <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;"><span style="color:var(--light-grey)">Confirmed</span><span style="color:#2ecc71;font-weight:700">${confirmed}</span></div><div style="height:8px;background:var(--dark3);border-radius:4px;overflow:hidden;"><div style="height:100%;background:#2ecc71;width:${allBookings.length?((confirmed/allBookings.length)*100).toFixed(1):0}%;border-radius:4px;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;"><span style="color:var(--light-grey)">Cancelled</span><span style="color:#e74c3c;font-weight:700">${cancelled}</span></div><div style="height:8px;background:var(--dark3);border-radius:4px;overflow:hidden;"><div style="height:100%;background:#e74c3c;width:${allBookings.length?((cancelled/allBookings.length)*100).toFixed(1):0}%;border-radius:4px;"></div></div></div>
+    </div>
+  `;
+}
+
+function renderBookingsTable(tbodyId, bookings, fullCols = false) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  if (!bookings.length) {
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--light-grey);">No bookings found</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = bookings.map(b => `
+    <tr>
+      <td>${b.photoUrl ? `<img src="${b.photoUrl}" class="client-photo-thumb" alt="client photo" onerror="this.outerHTML='<div class=\\'no-photo\\'>👤</div>'">` : '<div class="no-photo">👤</div>'}</td>
+      <td><strong>${b.name}</strong></td>
+      ${fullCols ? `<td><a href="tel:${b.phone}" style="color:var(--gold)">${b.phone}</a></td>` : ''}
+      <td>${b.service}</td>
+      <td style="color:var(--gold)">${b.hairstyle || '—'}</td>
+      ${fullCols ? `<td>${b.beardStyle || '—'}</td>` : ''}
+      <td>${b.date}</td>
+      <td>${b.time}</td>
+      <td><span class="status-badge status-${b.status}">${b.status}</span></td>
+      <td>
+        <div class="action-btns">
+          <button class="action-btn ab-view" onclick="viewBooking('${b.id}')">View</button>
+          ${b.status !== 'cancelled' ? `<button class="action-btn ab-cancel" onclick="updateStatus('${b.id}','cancelled')">Cancel</button>` : ''}
+          <button class="action-btn ab-delete" onclick="deleteBooking('${b.id}')">Del</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderTodayQueue() {
+  const today = new Date().toISOString().split('T')[0];
+  const todayBookings = allBookings.filter(b => b.date === today).sort((a,b) => a.time.localeCompare(b.time));
+  const tbody = document.getElementById('todayTbody');
+  if (!tbody) return;
+  if (!todayBookings.length) {
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--light-grey);">No appointments today</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = todayBookings.map((b, i) => `
+    <tr>
+      <td style="color:var(--gold);font-weight:700">#${i+1}</td>
+      <td>${b.photoUrl ? `<img src="${b.photoUrl}" class="client-photo-thumb" onerror="this.outerHTML='<div class=\\'no-photo\\'>👤</div>'">` : '<div class="no-photo">👤</div>'}</td>
+      <td><strong>${b.name}</strong></td>
+      <td><a href="tel:${b.phone}" style="color:var(--gold)">${b.phone}</a></td>
+      <td style="color:var(--gold);font-weight:700">${b.time}</td>
+      <td>${b.service}</td>
+      <td>${b.hairstyle || '—'}</td>
+      <td>${b.beardStyle || '—'}</td>
+      <td><span class="status-badge status-${b.status}">${b.status}</span></td>
+      <td>
+        <div class="action-btns">
+          <button class="action-btn ab-view" onclick="viewBooking('${b.id}')">View</button>
+          <button class="action-btn ab-cancel" onclick="updateStatus('${b.id}','cancelled')">Cancel</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderClientsGrid() {
+  const grid = document.getElementById('clientsGrid');
+  if (!grid) return;
+  const withPhotos = allBookings.filter(b => b.photoUrl);
+  if (!withPhotos.length) {
+    grid.innerHTML = '<div style="color:var(--light-grey);font-size:13px;grid-column:1/-1;padding:40px;text-align:center;">No client photos uploaded yet</div>';
+    return;
+  }
+  grid.innerHTML = withPhotos.map(b => `
+    <div style="background:var(--dark2);border:1px solid rgba(201,168,76,0.1);overflow:hidden;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.1)'">
+      <img src="${b.photoUrl}" style="width:100%;height:200px;object-fit:cover;object-position:top;" onerror="this.style.display='none'">
+      <div style="padding:16px;">
+        <div style="font-weight:700;font-size:14px;margin-bottom:4px;">${b.name}</div>
+        <div style="font-size:11px;color:var(--gold);margin-bottom:6px;">${b.hairstyle || '—'} / ${b.beardStyle || '—'}</div>
+        <div style="font-size:11px;color:var(--light-grey);">${b.date} at ${b.time}</div>
+        <div style="font-size:11px;color:var(--light-grey);">${b.service}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── BOOKING ACTIONS ────────────────────────────────────────────────
+function viewBooking(id) {
+  const b = allBookings.find(x => x.id === id);
+  if (!b) return;
+
+  document.getElementById('amPhoto').innerHTML = b.photoUrl
+    ? `<img src="${b.photoUrl}" style="max-width:160px;border:2px solid rgba(201,168,76,0.3);" onerror="this.style.display='none'">`
+    : '';
+
+  document.getElementById('amGrid').innerHTML = [
+    ['Name', b.name], ['Phone', b.phone], ['Service', b.service],
+    ['Hairstyle', b.hairstyle || '—'], ['Beard Style', b.beardStyle || '—'],
+    ['Date', b.date], ['Time', b.time], ['Status', b.status],
+    ['Booking ID', b.id.slice(0,8).toUpperCase()],
+    ['Booked At', new Date(b.createdAt).toLocaleString('en-IN')],
+    ...(b.notes ? [['Notes', b.notes]] : [])
+  ].map(([k,v]) => `<div class="am-field"><div class="am-field-label">${k}</div><div class="am-field-val">${v}</div></div>`).join('');
+
+  const wa = `919876543210`;
+  const msg = encodeURIComponent(`Hi ${b.name}! This is Prime Look Barber. Your appointment on ${b.date} at ${b.time} for ${b.service} is confirmed. See you soon! 💈`);
+  document.getElementById('amActions').innerHTML = `
+    <a href="https://wa.me/${wa}?text=${msg}" target="_blank" class="action-btn ab-view" style="padding:8px 16px;text-decoration:none;">💬 WhatsApp Client</a>
+    ${b.status !== 'cancelled' ? `<button class="action-btn ab-cancel" onclick="updateStatus('${b.id}','cancelled');closeAdminModal()">Cancel Booking</button>` : `<button class="action-btn ab-view" onclick="updateStatus('${b.id}','confirmed');closeAdminModal()">Restore</button>`}
+    <button class="action-btn ab-delete" onclick="deleteBooking('${b.id}');closeAdminModal()">Delete</button>
+  `;
+
+  document.getElementById('bookingDetailModal').classList.add('open');
+}
+
+async function updateStatus(id, status) {
+  try {
+    await fetch(`/admin/bookings/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'x-admin-auth': AUTH },
+      body: JSON.stringify({ status })
+    });
+    await loadBookings();
+    showAdminToast(`Booking ${status}`);
+  } catch(e) { showAdminToast('Update failed', true); }
+}
+
+async function deleteBooking(id) {
+  if (!confirm('Delete this booking permanently?')) return;
+  try {
+    await fetch(`/admin/bookings/${id}`, { method: 'DELETE', headers: { 'x-admin-auth': AUTH } });
+    await loadBookings();
+    showAdminToast('Booking deleted');
+  } catch(e) { showAdminToast('Delete failed', true); }
+}
+
+function filterBookings() {
+  const q = document.getElementById('bookingSearch').value.toLowerCase();
+  const status = document.getElementById('statusFilter').value;
+  const filtered = allBookings.filter(b => {
+    const matchText = !q || b.name.toLowerCase().includes(q) || b.service.toLowerCase().includes(q) || b.phone.includes(q);
+    const matchStatus = !status || b.status === status;
+    return matchText && matchStatus;
+  });
+  renderBookingsTable('bookingsTbody', filtered, true);
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────
+function showSection(id, el) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  if (el) {
+    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+}
+
+function closeAdminModal() { document.getElementById('bookingDetailModal').classList.remove('open'); }
+document.addEventListener('click', e => { if (e.target.id === 'bookingDetailModal') closeAdminModal(); });
+
+// ── UTILS ──────────────────────────────────────────────────────────
+function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+function formatNum(n) { return n >= 1000 ? (n/1000).toFixed(1) + 'K' : n; }
+
+let toastTimeout;
+function showAdminToast(msg, err = false) {
+  let t = document.getElementById('adminToast');
+  if (!t) { t = document.createElement('div'); t.id = 'adminToast'; t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--dark3);border:1px solid rgba(201,168,76,0.3);color:var(--white);padding:12px 24px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:opacity 0.3s;'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  if (err) t.style.borderColor = '#e74c3c';
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => { t.style.opacity = '0'; t.style.borderColor = 'rgba(201,168,76,0.3)'; }, 3000);
+}
+
+// Auto-refresh every 60 seconds
+setInterval(() => { if (AUTH) loadDashboard(); }, 60000);
+</script>
+</body>
+</html>
