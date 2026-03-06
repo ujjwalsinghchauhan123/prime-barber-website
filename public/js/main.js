@@ -693,7 +693,7 @@ function showToast(msg, type = '') {
 
 // ── WHATSAPP QUICK BOOK ────────────────────────────────────────────
 function quickWhatsApp() {
-  const wa = '919876543210';
+  const wa = '919899270571';
   const msg = encodeURIComponent('Hello Prime Look! 👋\nI\'d like to book an appointment.\n\nPlease confirm availability.');
   window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
 }
