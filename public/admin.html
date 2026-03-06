@@ -420,7 +420,7 @@ function viewBooking(id) {
     ...(b.notes ? [['Notes', b.notes]] : [])
   ].map(([k,v]) => `<div class="am-field"><div class="am-field-label">${k}</div><div class="am-field-val">${v}</div></div>`).join('');
 
-  const wa = `919876543210`;
+  const wa = `919899270571`;
   const msg = encodeURIComponent(`Hi ${b.name}! This is Prime Look Barber. Your appointment on ${b.date} at ${b.time} for ${b.service} is confirmed. See you soon! 💈`);
   document.getElementById('amActions').innerHTML = `
     <a href="https://wa.me/${wa}?text=${msg}" target="_blank" class="action-btn ab-view" style="padding:8px 16px;text-decoration:none;">💬 WhatsApp Client</a>
